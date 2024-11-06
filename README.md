@@ -24,3 +24,4 @@ https://onlinebanking.aibgb.co.uk/inet/gb/login.htm
 
 # Disable proxy per host
 --proxy-bypass-list=(<trailing_domain>|<ip-address>)[:<port>][;...]
+https://1.1.1.1/dns/tls/ssl/cloudflare.com
