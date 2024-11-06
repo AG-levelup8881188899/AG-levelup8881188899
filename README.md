@@ -14,7 +14,37 @@ https://www.connect/login/oauth/authorize?redirect_uri=github%3A%2F%2Fcom.github
 https://iforms.americanexpress.com/iFormsSecure/un/iforms.do?cuid=acceptance_en_US&evtsrc=viewPage.submitButton&evttype=0
 https://onlinebanking.aibgb.co.uk/inet/gb/login.htm
 # Disable proxy
---no-proxy-server
+--on-proxy-server
+---
+apiVersion: mast.ansi.services/v1
+kind: MastJob
+metadata:
+  name: git-basic-auth
+  namespace: mast
+spec:
+  ansible:
+    version: 2.9.18
+  repository:
+    git:
+      url: https://github.com/smokaleksander/ansible_example.git
+      credentials:
+        basicAuth:
+          usernameSecret:
+            name: test-secret-basic-auth
+            key: username
+          passwordSecret:
+            name: test-secret-basic-auth
+            key: password
+  configuration:
+    playbook:
+      - fromRepo:
+          path: ansible-hello/playbook1.yaml
+    vars:
+      - fromRepo:
+          path: ansible-hello/vars.yaml
+    inventory:
+      - fromRepo:
+          path: ansible-hello/inventory
 
 # Manual proxy address
 --proxy-server=<scheme>=<uri>[:<port>][;...] | <uri>[:<port>] | "direct://"
